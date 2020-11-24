@@ -4,7 +4,10 @@ import "./CityInfo.css"
 class CityInfo extends Component{
 
     render() {
-        let unixTime = Date.now()
+
+        const { info } = this.props
+
+        const unixTime = Date.now()
         let formattedDate = new Date(unixTime)
         let date = formattedDate.toLocaleString('en-US', {
             weekday: 'short',
@@ -21,19 +24,28 @@ class CityInfo extends Component{
             <section className="city-info">
                 <ul>
                     <li>
-                        { this.props.info !== null && this.props.info.data.attributes.city }
+                        { info !== null && info.data.attributes.city }
                     </li>
 
                     <li>
-                        { this.props.info !== null && this.props.info.data.attributes.state }
+                        { info !== null && info.data.attributes.state }
                     </li>
 
                     <li>
-                        { this.props.info !== null && this.props.info.data.attributes.country }
+                        { info !== null && info.data.attributes.country }
                     </li>
 
                     <li>
-                        { this.props.info !== null && this.props.info.data.attributes.current.temp }
+                        { info !== null && info.data.attributes.current.temp }
+                    </li>
+
+                    <li>
+                        { info !== null && info.data.attributes.current.weather_description }
+                    </li>
+
+                    <li>
+                        <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>
+
                     </li>
 
                     <li>
