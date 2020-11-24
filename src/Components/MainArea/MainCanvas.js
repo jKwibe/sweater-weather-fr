@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios"
 
 import CityInfo from "../CityInfo/CityInfo";
 import TopWeather from "../TopWeather/TopWeather";
@@ -8,6 +9,28 @@ import "./MainCanvas.css"
 
 
 class MainCanvas extends Component{
+    constructor(props) {
+        super(props);
+        this.getData().then(data => console.log(data)).catch(e => console.error(e))
+        this.state = {
+            forecast: {}
+        }
+
+    }
+
+    async getData(){
+        let res = await axios.get("https://sweater-weather-api-rails.herokuapp.com/api/v1/forecast",
+            {
+                params:{
+                    location: 'denver,co'
+                }
+            }
+            );
+
+        this.setState({
+            forecast: res.data
+        })
+    }
 
     render() {
         return(
