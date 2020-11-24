@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 import MainNavbar from "./Navbar/Navbar";
 import MainCanvas from "./MainArea/MainCanvas";
+import Footer from "./Footer/Footer";
 
 class SweaterWeather extends Component {
     render() {
@@ -9,6 +10,7 @@ class SweaterWeather extends Component {
             <section className="container">
                 <MainNavbar/>
                 <MainCanvas/>
+                <Footer/>
             </section>
         )
     }
