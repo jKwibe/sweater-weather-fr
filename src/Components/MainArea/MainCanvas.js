@@ -32,7 +32,6 @@ class MainCanvas extends Component{
         await this.fetchData()
     }
 
-
     async fetchData() {
         let res = await
             axios.get("https://sweater-weather-api-rails.herokuapp.com/api/v1/forecast",
@@ -51,7 +50,6 @@ class MainCanvas extends Component{
     render() {
         const { forecast, coordinates } = this.state;
         console.log(coordinates)
-
 
         return(
             <main className="main-section">

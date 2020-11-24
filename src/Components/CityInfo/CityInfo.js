@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "./CityInfo.css"
+import {Row, Col} from "react-bootstrap";
 
 class CityInfo extends Component{
 
@@ -10,9 +11,8 @@ class CityInfo extends Component{
         const unixTime = Date.now()
         let formattedDate = new Date(unixTime)
         let date = formattedDate.toLocaleString('en-US', {
-            weekday: 'short',
-            month: '2-digit',
-            year: '2-digit'
+            day: '2-digit',
+            month: 'long'
         })
 
         let time = formattedDate.toLocaleString('en-US', {
@@ -22,41 +22,21 @@ class CityInfo extends Component{
 
         return(
             <section className="city-info">
-                <ul>
-                    <li>
-                        { info !== null && info.data.attributes.city }
-                    </li>
-
-                    <li>
-                        { info !== null && info.data.attributes.state }
-                    </li>
-
-                    <li>
-                        { info !== null && info.data.attributes.country }
-                    </li>
-
-                    <li>
-                        { info !== null && info.data.attributes.current.temp }
-                    </li>
-
-                    <li>
-                        { info !== null && info.data.attributes.current.weather_description }
-                    </li>
-
-                    <li>
+                <Row>
+                    <Col>
                         <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>
+                        { info !== null && info.data.attributes.current.weather_description } <br/>
+                        { info !== null && info.data.attributes.current.temp } &#8457;
+                    </Col>
+                    <Col>
+                        { info !== null && info.data.attributes.city },
+                        { info !== null && info.data.attributes.state } <br/>
+                        { info !== null && info.data.attributes.country } <br/>
+                        { time }, { date } <br/>
 
-                    </li>
-
-                    <li>
-                        { date }
-                    </li>
-
-                    <li>
-                        { time }
-                    </li>
-
-                </ul>
+                        <a href="#" rel="noreferrer">Change favorite Location</a>
+                    </Col>
+                </Row>
             </section>
         )
     }
