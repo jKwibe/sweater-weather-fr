@@ -10,11 +10,28 @@ import "./MainCanvas.css"
 
 class MainCanvas extends Component{
         state = {
-            forecast: null
+            forecast: null,
+            coordinates: {
+                lat: null,
+                lon: null,
+            }
+
         }
     async componentDidMount() {
-        this.fetchData().then()
+        let lat, lon;
+        navigator.geolocation.watchPosition((position)=> {
+            lat = position.coords.latitude
+            lon = position.coords.longitude
+            this.setState({
+                coordinates: {
+                    lat,
+                    lon
+                }
+            })
+        })
+        await this.fetchData()
     }
+
 
     async fetchData() {
         let res = await
@@ -32,7 +49,10 @@ class MainCanvas extends Component{
     }
 
     render() {
-        const { forecast } = this.state;
+        const { forecast, coordinates } = this.state;
+        console.log(coordinates)
+
+
         return(
             <main className="main-section">
                 <section className="top-city-info row">
@@ -41,13 +61,13 @@ class MainCanvas extends Component{
                     </article>
 
                     <article className="right-city-info col-6">
-                        <TopWeather/>
+                        <TopWeather info={forecast}/>
                     </article>
                 </section>
 
                 <section className="row">
                     <section className="col-12">
-                        <WeaklyForecast/>
+                        <WeaklyForecast info={forecast}/>
                     </section>
                 </section>
             </main>
