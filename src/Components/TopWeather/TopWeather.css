@@ -1,0 +1,6 @@
+section.top-weather-info{
+    border: 2px solid darkgreen;
+    position: static;
+    padding: 20px;
+    height: 250px;
+}
