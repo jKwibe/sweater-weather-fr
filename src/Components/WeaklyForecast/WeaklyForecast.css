@@ -1,6 +1,7 @@
 section.weakly-forecast{
-    border: 2px solid deepskyblue;
+    border: 1px solid gainsboro;
     position: static;
     padding: 20px;
-    height: 250px;
+    height: 400px;
+    margin-top: 2rem;
 }

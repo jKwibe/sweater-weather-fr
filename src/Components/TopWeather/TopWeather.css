@@ -1,6 +1,15 @@
 section.top-weather-info{
-    border: 2px solid darkgreen;
-    position: static;
     padding: 20px;
-    height: 250px;
+}
+
+.top-weather-info__rise-set{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem;
+}
+
+.top-weather{
+    border: 1px solid gainsboro;
+    height: 100%;
 }

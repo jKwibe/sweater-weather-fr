@@ -21,7 +21,7 @@ class CityInfo extends Component{
         })
 
         return(
-            <section className="city-info">
+            <section className="top-weather city-info">
                 <Row>
                     <Col>
                         <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>

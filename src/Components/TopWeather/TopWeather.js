@@ -1,46 +1,38 @@
 import React, {Component} from "react";
 import "./TopWeather.css";
+import {Row, Col}from "react-bootstrap";
 
 class TopWeather extends Component{
     render() {
         const { info } = this.props
 
         return(
-            <section className="top-weather-info">
-                <ul>
-                    <li>
-                        weather description:{ info !== null && info.data.attributes.current.weather_description }
-                    </li>
-
-                    <li>
+            <section className="top-weather top-weather-info">
+                <Row>
+                    <Col>
                         <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>
-                    </li>
+                        <br/>
+                        { info !== null && info.data.attributes.current.weather_description }
 
-                    <li>
-                      sunrise:   { info !== null && info.data.attributes.current.sunrise }
-                    </li>
+                    </Col>
+                    <Col>
+                        <p><span>Humidity:</span>{ info !== null && info.data.attributes.current.humidity }</p>
+                        <p><span>Feels Like:</span>{ info !== null && info.data.attributes.current.feels_like }</p>
+                        <p><span>UVI:</span>{ info !== null && info.data.attributes.current.uvi }</p>
+                        <p><span>Visibility:</span>{ info !== null && info.data.attributes.current.visibility }</p>
 
-                    <li>
-                       sunset:  { info !== null && info.data.attributes.current.sunset }
-                    </li>
-
-                    <li>
-                      feels like:  { info !== null && info.data.attributes.current.feels_like }
-                    </li>
-
-                    <li>
-                       uvi: { info !== null && info.data.attributes.current.uvi }
-                    </li>
-
-                    <li>
-                       visibility: { info !== null && info.data.attributes.current.visibility }
-                    </li>
-
-                    <li>
-                       humidity: { info !== null && info.data.attributes.current.humidity }
-                    </li>
-                </ul>
-
+                    </Col>
+                </Row>
+                <Row>
+                    <section className="top-weather-info__rise-set">
+                        <div>
+                            <p><span>Sunrise: </span>{ info !== null && info.data.attributes.current.sunrise }</p>
+                        </div>
+                        <div>
+                            <p><span>Sunset: </span>{ info !== null && info.data.attributes.current.sunset }</p>
+                        </div>
+                    </section>
+                </Row>
             </section>
         )
     }

@@ -62,7 +62,6 @@ class MainCanvas extends Component{
                         <TopWeather info={forecast}/>
                     </article>
                 </section>
-
                 <section className="row">
                     <section className="col-12">
                         <WeaklyForecast info={forecast}/>
