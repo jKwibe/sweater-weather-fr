@@ -7,6 +7,7 @@ class CityInfo extends Component{
     render() {
 
         const { info } = this.props
+        console.log(info)
 
         const unixTime = Date.now()
         let formattedDate = new Date(unixTime)
@@ -24,17 +25,18 @@ class CityInfo extends Component{
             <section className="top-weather city-info">
                 <Row>
                     <Col>
-                        <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>
-                        { info !== null && info.data.attributes.current.weather_description } <br/>
-                        { info !== null && Math.floor(info.data.attributes.current.temp) } &#8457;
+                        <img src={ info.data.attributes.current.icon } alt="weather icon"/>
+                        {  info.data.attributes.current.weather_description } <br/>
+                        { Math.floor(info.data.attributes.current.temp) } &#8457;
                     </Col>
                     <Col>
-                        { info !== null && info.data.attributes.city },
-                        { info !== null && info.data.attributes.state } <br/>
-                        { info !== null && info.data.attributes.country } <br/>
+                        { info.data.attributes.city },
+                        { info.data.attributes.state } <br/>
+                        { info.data.attributes.country } <br/>
                         { time }, { date } <br/>
 
-                        <a href="#" rel="noreferrer">Change favorite Location</a>
+                        <a href="#c" rel="noreferrer">Change favorite Location</a>{/* Change href route */}
+
                     </Col>
                 </Row>
             </section>

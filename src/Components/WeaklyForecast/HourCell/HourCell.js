@@ -4,12 +4,15 @@ import "./HourCell.css"
 
 class HourCell extends Component{
     render() {
+
+        const {time, icon, temp} = this.props.data
+
         return(
             <section className="hourly-weather">
                 <div>
-                    { this.props.data.time }<br/>
-                    <img src={ this.props.data=== null? "" : this.props.data.icon } alt="weather icon"/>
-                    { Math.floor(this.props.data.temp) }  &#8457;
+                    { time }<br/>
+                    <img src={ icon } alt="weather icon"/>
+                    { Math.floor(temp) }  &#8457;
                 </div>
             </section>
         )

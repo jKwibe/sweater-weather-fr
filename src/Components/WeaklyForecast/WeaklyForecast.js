@@ -6,16 +6,12 @@ import Daily from "./Daily/Daily";
 
 class WeaklyForecast extends Component{
     render() {
-        let hourlyData ;
-        let dailyData;
-        if(this.props.info !== null){
-            hourlyData = this.props.info.data.attributes.hourly
-            dailyData = this.props.info.data.attributes.daily
-        }
+        const { daily, hourly } = this.props.info.data.attributes
+
         return(
             <section className="weakly-forecast">
-                <Hourly hourlyData = {hourlyData}/>
-                <Daily dailyData = {dailyData}/>
+                <Hourly hourlyData = {hourly}/>
+                <Daily dailyData = {daily}/>
             </section>
         )
     }

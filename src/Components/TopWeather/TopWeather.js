@@ -4,32 +4,40 @@ import {Row, Col}from "react-bootstrap";
 
 class TopWeather extends Component{
     render() {
-        const { info } = this.props
+        const { icon,
+            weather_description,
+            humidity,
+            feels_like,
+            uvi,
+            visibility,
+            sunrise,
+            sunset
+        } = this.props.info.data.attributes.current
 
         return(
             <section className="top-weather top-weather-info">
                 <Row>
                     <Col>
-                        <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>
+                        <img src={ icon } alt="weather icon"/>
                         <br/>
-                        { info !== null && info.data.attributes.current.weather_description }
+                        { weather_description }
 
                     </Col>
                     <Col>
-                        <p><span>Humidity:</span>{ info !== null && info.data.attributes.current.humidity }</p>
-                        <p><span>Feels Like:</span>{ info !== null && info.data.attributes.current.feels_like }</p>
-                        <p><span>UVI:</span>{ info !== null && info.data.attributes.current.uvi }</p>
-                        <p><span>Visibility:</span>{ info !== null && info.data.attributes.current.visibility }</p>
+                        <p><span>Humidity:</span>{ humidity }</p>
+                        <p><span>Feels Like:</span>{ feels_like }</p>
+                        <p><span>UVI:</span>{ uvi }</p>
+                        <p><span>Visibility:</span>{ visibility }</p>
 
                     </Col>
                 </Row>
                 <Row>
                     <section className="top-weather-info__rise-set">
                         <div>
-                            <p><span>Sunrise: </span>{ info !== null && info.data.attributes.current.sunrise }</p>
+                            <p><span>Sunrise: </span>{ sunrise }</p>
                         </div>
                         <div>
-                            <p><span>Sunset: </span>{ info !== null && info.data.attributes.current.sunset }</p>
+                            <p><span>Sunset: </span>{ sunset }</p>
                         </div>
                     </section>
                 </Row>

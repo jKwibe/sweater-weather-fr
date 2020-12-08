@@ -11,9 +11,9 @@ class Daily extends Component{
         return(
             <section className="daily-row__group">
                 <hr/>
-                { dailyData && dailyData.map((dailyData)=>(
+                { dailyData.map((dailyInfo)=>(
                     <section key={count++}>
-                        <DailyRow data = { dailyData }/>
+                        <DailyRow data = { dailyInfo }/>
                     </section>
                 )) }
             </section>

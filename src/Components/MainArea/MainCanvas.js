@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import axios from "axios"
 
 import CityInfo from "../CityInfo/CityInfo";
@@ -11,65 +11,60 @@ import "./MainCanvas.css"
 class MainCanvas extends Component{
         state = {
             forecast: null,
-            coordinates: {
-                lat: null,
-                lon: null,
-            }
-
+            isLoaded: false
         }
-    componentDidMount() {
-        let lat, lon;
-        navigator.geolocation.watchPosition((position)=> {
-            lat = position.coords.latitude
-            lon = position.coords.longitude
-            this.setState({
-                coordinates: {
-                    lat,
-                    lon
-                }
-            })
-        })
+    loc(location = "denver,co"){
+        return location
     }
+    async componentDidMount() {
 
-    async fetchData(location) {
         let res = await
             axios.get("https://sweater-weather-api-rails.herokuapp.com/api/v1/forecast",
                 {
                     params:{
-                        location
+                        location: this.loc()
                     }
                 }
             );
 
         this.setState({
-            forecast: res.data
+            forecast: res.data,
+            isLoaded: true
         })
     }
 
     // eslint-disable-next-line react/require-render-return
     render() {
-        const { forecast, coordinates } = this.state;
-        let location = 'denver,co'
 
-        this.fetchData(location)
+        const { forecast, isLoaded } = this.state;
 
-        return(
-            <main className="main-section">
-                <section className="top-city-info row">
-                    <article className="left-city-info col-6">
-                        <CityInfo info={forecast}/>
-                    </article>
+        if(isLoaded) {
+            return (
+                <main className="main-section">
+                    <section className="top-city-info row">
+                        <article className="left-city-info col-6">
+                            <CityInfo info={forecast}/>
+                        </article>
 
-                    <article className="right-city-info col-6">
-                        <TopWeather info={forecast}/>
-                    </article>
-                </section>
-                <section className="row">
-                    <section className="col-12">
-                        <WeaklyForecast info={forecast}/>
+                        <article className="right-city-info col-6">
+                            <TopWeather info={forecast}/>
+                        </article>
                     </section>
+                    <section className="row">
+                        <section className="col-12">
+                            <WeaklyForecast info={forecast}/>
+                        </section>
+                    </section>
+                </main>
+            )
+        }
+
+        return (
+            <Fragment>
+                <section>
+                    <p>Loading...</p>
                 </section>
-            </main>
+            </Fragment>
         )
     }
 }

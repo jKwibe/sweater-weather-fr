@@ -7,27 +7,30 @@ import "./DailyRow.css"
 class DailyRow extends  Component{
 
     render() {
+
+        const { time, description, precipitation, temp_high, temp_low } = this.props.data
+
         return(
             <section className="daily-row__box">
                 <Row>
                     <Col lg={3}>
-                        {this.props.data.time}
+                        { time }
                     </Col>
 
                     <Col lg={3}>
-                        {this.props.data.description}
+                        { description }
                     </Col>
 
                     <Col lg={2}>
-                        {this.props.data.precipitation === null? 0 : this.props.data.precipitation}mm
+                        { precipitation === null? 0 : precipitation }mm
                     </Col>
 
                     <Col lg={2}>
-                        {Math.floor(this.props.data.temp_high)}&#8457;
+                        {Math.floor(temp_high)}&#8457;
                     </Col>
 
                     <Col lg={2}>
-                        {Math.floor(this.props.data.temp_low)}&#8457;
+                        {Math.floor(temp_low)}&#8457;
                     </Col>
                 </Row>
             </section>
