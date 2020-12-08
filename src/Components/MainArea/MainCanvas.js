@@ -17,7 +17,7 @@ class MainCanvas extends Component{
             }
 
         }
-    async componentDidMount() {
+    componentDidMount() {
         let lat, lon;
         navigator.geolocation.watchPosition((position)=> {
             lat = position.coords.latitude
@@ -29,15 +29,14 @@ class MainCanvas extends Component{
                 }
             })
         })
-        await this.fetchData()
     }
 
-    async fetchData() {
+    async fetchData(location) {
         let res = await
             axios.get("https://sweater-weather-api-rails.herokuapp.com/api/v1/forecast",
                 {
                     params:{
-                        location: 'denver,co'
+                        location
                     }
                 }
             );
@@ -47,9 +46,12 @@ class MainCanvas extends Component{
         })
     }
 
+    // eslint-disable-next-line react/require-render-return
     render() {
         const { forecast, coordinates } = this.state;
-        console.log(coordinates)
+        let location = 'denver,co'
+
+        this.fetchData(location)
 
         return(
             <main className="main-section">
