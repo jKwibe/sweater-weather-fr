@@ -26,7 +26,7 @@ class CityInfo extends Component{
                     <Col>
                         <img src={ info === null? "" : info.data.attributes.current.icon } alt="weather icon"/>
                         { info !== null && info.data.attributes.current.weather_description } <br/>
-                        { info !== null && info.data.attributes.current.temp } &#8457;
+                        { info !== null && Math.floor(info.data.attributes.current.temp) } &#8457;
                     </Col>
                     <Col>
                         { info !== null && info.data.attributes.city },
