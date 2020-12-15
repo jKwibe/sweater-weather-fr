@@ -8,7 +8,7 @@ class Hourly extends Component{
       const { hourlyData } = this.props
 
       let data;
-      data =   hourlyData.slice(0, 12).map((i) => i)
+      data = hourlyData.slice(0, 12)
 
       let count = 0;
 
