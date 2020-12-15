@@ -7,13 +7,12 @@ function MainNavbar() {
     return (
         <header className="main-header">
             <Navbar>
-                <Navbar.Brand href="#home">Sweater Weather</Navbar.Brand>
+                <Navbar.Brand href="/">Sweater Weather</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-
                     <Nav className="ml-auto">
-                        <Nav.Link href="#">SignIn</Nav.Link>
-                        <Nav.Link href="#">SignUp</Nav.Link>
+                        <Nav.Link href="/signin">SignIn</Nav.Link>
+                        <Nav.Link href="/signup">SignUp</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
