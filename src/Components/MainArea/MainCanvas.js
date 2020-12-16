@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from "react";
-import axios from "axios"
 
 import CityInfo from "../CityInfo/CityInfo";
 import TopWeather from "../TopWeather/TopWeather";
 import WeaklyForecast from "../WeaklyForecast/WeaklyForecast";
+
+import weatherForecast from "../../API/ForecastApi";
 
 import "./MainCanvas.css"
 
@@ -11,24 +12,12 @@ import "./MainCanvas.css"
 class MainCanvas extends Component{
         state = {
             forecast: null,
-            isLoaded: false
+            isLoaded: false,
+            location: "denver,co"
         }
-    loc(location = "denver,co"){
-        return location
-    }
 
-    // TODO: Add the api call logic to the api call directory
     async componentDidMount() {
-
-        let res = await
-            axios.get("https://sweater-weather-api-rails.herokuapp.com/api/v1/forecast",
-                {
-                    params:{
-                        location: this.loc()
-                    }
-                }
-            );
-
+        let res = await weatherForecast(this.state.location)
         this.setState({
             forecast: res.data,
             isLoaded: true
