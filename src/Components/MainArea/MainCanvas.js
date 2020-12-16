@@ -16,6 +16,8 @@ class MainCanvas extends Component{
     loc(location = "denver,co"){
         return location
     }
+
+    // TODO: Add the api call logic to the api call directory
     async componentDidMount() {
 
         let res = await

@@ -1,6 +1,11 @@
 import React, {Component} from "react";
-import "./CityInfo.css"
 import {Row, Col} from "react-bootstrap";
+
+// import CSS
+import "./CityInfo.css"
+
+// import the style component
+import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 class CityInfo extends Component{
 
@@ -22,7 +27,7 @@ class CityInfo extends Component{
         })
 
         return(
-            <section className="top-weather city-info">
+            <CoverBorder>
                 <Row>
                     <Col>
                         <img src={ info.data.attributes.current.icon } alt="weather icon"/>
@@ -39,7 +44,7 @@ class CityInfo extends Component{
 
                     </Col>
                 </Row>
-            </section>
+            </CoverBorder>
         )
     }
 }
