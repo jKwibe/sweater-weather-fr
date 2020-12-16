@@ -16,12 +16,29 @@ class MainCanvas extends Component{
             location: "denver,co"
         }
 
+        onLocationChange = (location)=> {
+            console.log(`You have reached the top ${location}`)
+            this.setState({
+                location: location
+            })
+        }
+
     async componentDidMount() {
         let res = await weatherForecast(this.state.location)
+        console.log(res, this.state.location)
         this.setState({
             forecast: res.data,
             isLoaded: true
         })
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.location !== prevState.location){
+            let res = await weatherForecast(this.state.location)
+            this.setState({
+                forecast: res.data
+            })
+        }
     }
 
     // eslint-disable-next-line react/require-render-return
@@ -34,11 +51,11 @@ class MainCanvas extends Component{
                 <main className="main-section">
                     <section className="top-city-info row">
                         <article className="left-city-info col-6">
-                            <CityInfo info={forecast}/>
+                            <CityInfo onChangeLoc={this.onLocationChange} info={forecast}/>
                         </article>
 
                         <article className="right-city-info col-6">
-                            <TopWeather info={forecast}/>
+                            <TopWeather  info={forecast}/>
                         </article>
                     </section>
                     <section className="row">
