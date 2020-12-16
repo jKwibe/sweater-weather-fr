@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SweaterWeather from './Components/SweaterWeather';
+import App from './Components/App/App';
 import reportWebVitals from './reportWebVitals';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SweaterWeather />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

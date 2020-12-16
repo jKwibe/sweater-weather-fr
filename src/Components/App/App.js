@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
-import MainNavbar from "./Navbar/Navbar";
-import MainCanvas from "./MainArea/MainCanvas";
-import Footer from "./Footer/Footer";
+import MainNavbar from "../Navbar/Navbar";
+import MainCanvas from "../MainArea/MainCanvas";
+import Footer from "../Footer/Footer";
 import Switch from "react-bootstrap/Switch";
 
-import SignIn from "./SignIn/SignIn"
-import SignUp from "./SignUp/SignUp"
+import SignIn from "../SignIn/SignIn"
+import SignUp from "../SignUp/SignUp"
 
-class SweaterWeather extends Component {
+class App extends Component {
     render() {
         return(
             <section className="container">
@@ -27,4 +27,4 @@ class SweaterWeather extends Component {
     }
 }
 
-export default SweaterWeather;
+export default App;
