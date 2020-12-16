@@ -8,6 +8,7 @@ class SearchLocation extends Component{
     onLocChange = (event)=>{
         event.preventDefault()
         this.props.onSubmit(this.state.inputText)
+        this.props.hideForm()
         this.setState({
             inputText:''
         })

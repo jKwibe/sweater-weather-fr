@@ -11,7 +11,20 @@ import "./CityInfo.css"
 import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 class CityInfo extends Component{
+    state = {
+        toggleDisplay: false
+    }
+
     onFormDisplay = ()=>{
+        this.setState({
+            toggleDisplay: !this.state.toggleDisplay
+        })
+    }
+
+    onHide =() =>{
+        this.setState({
+            toggleDisplay: false
+        })
     }
 
     render() {
@@ -48,7 +61,7 @@ class CityInfo extends Component{
                             style={{ color: "blue"}}
                             onClick={this.onFormDisplay}
                         >Change favorite Location</p>{/* Change href route */}
-                        <SearchLocation onSubmit={ this.props.onChangeLoc}/>
+                        { this.state.toggleDisplay && <SearchLocation hideForm={this.onHide} onSubmit={this.props.onChangeLoc}/>}
 
                     </Col>
                 </Row>
