@@ -8,11 +8,13 @@ import "./CityInfo.css"
 import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 class CityInfo extends Component{
+    onFormDisplay = ()=>{
+        console.log("The form has displayed")
+    }
 
     render() {
 
-        const { info } = this.props
-        console.log(info)
+        const { current, country, city, state } = this.props.info.data.attributes
 
         const unixTime = Date.now()
         let formattedDate = new Date(unixTime)
@@ -30,17 +32,20 @@ class CityInfo extends Component{
             <CoverBorder>
                 <Row>
                     <Col>
-                        <img src={ info.data.attributes.current.icon } alt="weather icon"/>
-                        {  info.data.attributes.current.weather_description } <br/>
-                        { Math.floor(info.data.attributes.current.temp) } &#8457;
+                        <img src={ current.icon } alt="weather icon"/>
+                        {  current.weather_description } <br/>
+                        { Math.floor(current.temp) } &#8457;
                     </Col>
                     <Col>
-                        { info.data.attributes.city },
-                        { info.data.attributes.state } <br/>
-                        { info.data.attributes.country } <br/>
+                        { city },
+                        { state } <br/>
+                        { country } <br/>
                         { time }, { date } <br/>
 
-                        <a href="#c" rel="noreferrer">Change favorite Location</a>{/* Change href route */}
+                        <p
+                            style={{ color: "blue"}}
+                            onClick={this.onFormDisplay}
+                        >Change favorite Location</p>{/* Change href route */}
 
                     </Col>
                 </Row>
