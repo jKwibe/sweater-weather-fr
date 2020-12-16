@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import {Row, Col} from "react-bootstrap";
 
+// import project components
+import SearchLocation from "../SearchLocation/searchLocation";
+
 // import CSS
 import "./CityInfo.css"
 
@@ -9,7 +12,6 @@ import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 class CityInfo extends Component{
     onFormDisplay = ()=>{
-        console.log("The form has displayed")
     }
 
     render() {
@@ -46,6 +48,7 @@ class CityInfo extends Component{
                             style={{ color: "blue"}}
                             onClick={this.onFormDisplay}
                         >Change favorite Location</p>{/* Change href route */}
+                        <SearchLocation onSubmit={ this.props.onChangeLoc}/>
 
                     </Col>
                 </Row>
