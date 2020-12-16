@@ -17,7 +17,6 @@ class MainCanvas extends Component{
         }
 
         onLocationChange = (location)=> {
-            console.log(`You have reached the top ${location}`)
             this.setState({
                 location: location
             })
