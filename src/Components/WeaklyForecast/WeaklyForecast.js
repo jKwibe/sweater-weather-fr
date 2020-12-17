@@ -16,10 +16,8 @@ class WeaklyForecast extends Component{
 
         return(
             <section style={{ marginTop: 20}}>
-                <CoverBorder>
-                    <Hourly hourlyData = {hourly}/>
-                    <Daily dailyData = {daily}/>
-                </CoverBorder>
+                <Hourly hourlyData = {hourly}/>
+                <Daily dailyData = {daily}/>
             </section>
         )
     }

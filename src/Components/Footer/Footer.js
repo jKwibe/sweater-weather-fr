@@ -10,8 +10,12 @@ function Footer(){
                     <p>Made with love by Kwibe Merci. Turing School of Software and Design </p>
                 </div>
                 <div className="footer-content_icons">
-                    <a href="https://www.linkedin.com/in/kwibe-merci/" target="_blank" rel="noreferrer">LinkedIn</a>
-                    <a href="https://github.com/jKwibe" target="_blank" rel="noreferrer">Github</a>
+                    <a href="https://www.linkedin.com/in/kwibe-merci/" className="footer-icon" target="_blank" rel="noreferrer">
+                        <i className="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/jKwibe" className="footer-icon" target="_blank" rel="noreferrer">
+                        <i className="fab fa-github"></i>
+                    </a>
                 </div>
             </section>
         </footer>

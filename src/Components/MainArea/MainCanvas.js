@@ -3,6 +3,7 @@ import React, {Component, Fragment} from "react";
 import CityInfo from "../CityInfo/CityInfo";
 import TopWeather from "../TopWeather/TopWeather";
 import WeaklyForecast from "../WeaklyForecast/WeaklyForecast";
+import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 import weatherForecast from "../../API/ForecastApi";
 import backgroundImage from "../../API/BackgroundApi";
@@ -73,11 +74,11 @@ class MainCanvas extends Component{
                                 <TopWeather  info={forecast}/>
                             </article>
                         </section>
-                        <section className="row">
+                        <CoverBorder className="row">
                             <section className="col-12">
                                 <WeaklyForecast info={forecast}/>
                             </section>
-                        </section>
+                        </CoverBorder>
                     </div>
                 </main>
             )
