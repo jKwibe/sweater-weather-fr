@@ -8,7 +8,7 @@ import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 import weatherForecast from "../../API/ForecastApi";
 import backgroundImage from "../../API/BackgroundApi";
 
-import "./MainCanvas.css"
+import "./MainCanvas.scss"
 
 
 class MainCanvas extends Component{

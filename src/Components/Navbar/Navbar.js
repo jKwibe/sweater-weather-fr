@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
-import "./Navbar.css"
+import "./Navbar.scss"
 
 function MainNavbar() {
     return (

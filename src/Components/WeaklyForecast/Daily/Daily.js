@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import DailyRow from "../DailyRow/DailyRow";
 
-import "./Daily.css"
+import "./Daily.scss"
 
 class Daily extends Component{
 

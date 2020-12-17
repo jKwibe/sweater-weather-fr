@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Form, Button} from "react-bootstrap";
 
-import "./searchLocation.css"
+import "./searchLocation.scss"
 
 class SearchLocation extends Component{
     state = {

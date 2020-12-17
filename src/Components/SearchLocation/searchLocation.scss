@@ -5,6 +5,7 @@
     padding: 20px;
     margin: 10px auto;
     position: relative;
+    z-index: 100;
 }
 
 .location-form:before{
@@ -15,6 +16,7 @@
     height: 20px;
     transform: rotate(45deg);
     top: -5px;
+    z-index: 0;
 }
 
 .submit-button{
@@ -28,6 +30,8 @@ input[type=text].location-input{
     border-radius: 0 !important;
     outline: none !important;
     height: 1.9rem !important;
+    position: relative;
+    z-index: 2;
 }
 
 input[type=text].location-input::placeholder{

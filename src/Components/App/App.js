@@ -9,7 +9,7 @@ import Switch from "react-bootstrap/Switch";
 import SignIn from "../SignIn/SignIn"
 import SignUp from "../SignUp/SignUp"
 
-import "./App.css"
+import "./App.scss"
 
 class App extends Component {
     render() {

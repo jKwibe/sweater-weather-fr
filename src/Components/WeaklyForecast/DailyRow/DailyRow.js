@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Row from "react-bootstrap/cjs/Row";
 import {Col} from "react-bootstrap";
 
-import "./DailyRow.css"
+import "./DailyRow.scss"
 
 class DailyRow extends  Component{
 

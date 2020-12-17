@@ -1,11 +1,12 @@
 import React, {Component} from "react";
 import {Row, Col} from "react-bootstrap";
+import {countries} from "country-data"
 
 // import project components
 import SearchLocation from "../SearchLocation/searchLocation";
 
 // import CSS
-import "./CityInfo.css"
+import "./CityInfo.scss"
 
 // import the style component
 import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
@@ -82,6 +83,8 @@ class CityInfo extends Component{
     render() {
         const { current, country, city, state } = this.props.info.data.attributes
 
+        console.log(countries['US'].name)
+
         return(
             <CoverBorder>
                 <Row>
@@ -93,7 +96,7 @@ class CityInfo extends Component{
                     <Col>
                         { city },
                         { state } <br/>
-                        { country } <br/>
+                        { countries[country].name } <br/>
                         { this.state.time }, { this.state.date } <br/>
 
                         <div

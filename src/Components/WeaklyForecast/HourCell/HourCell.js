@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import "./HourCell.css"
+import "./HourCell.scss"
 
 class HourCell extends Component{
     render() {

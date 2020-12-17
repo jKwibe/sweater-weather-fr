@@ -5,7 +5,7 @@ import {Row, Col}from "react-bootstrap";
 import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 // import CSS
-import "./TopWeather.css";
+import "./TopWeather.scss";
 
 class TopWeather extends Component{
     render() {

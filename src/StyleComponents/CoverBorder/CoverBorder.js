@@ -1,7 +1,7 @@
 import React from "react";
 
 //import css
-import "./CoverBorder.css"
+import "./CoverBorder.scss"
 
 
 const CoverBorder = (props) => {
