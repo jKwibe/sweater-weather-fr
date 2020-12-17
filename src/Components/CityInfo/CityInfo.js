@@ -12,7 +12,9 @@ import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
 class CityInfo extends Component{
     state = {
-        toggleDisplay: false
+        toggleDisplay: false,
+        time: "",
+        date:""
     }
 
     onFormDisplay = ()=>{
@@ -27,10 +29,7 @@ class CityInfo extends Component{
         })
     }
 
-    render() {
-
-        const { current, country, city, state } = this.props.info.data.attributes
-
+    getTime = ()=>{
         const unixTime = Date.now()
         let formattedDate = new Date(unixTime)
         let date = formattedDate.toLocaleString('en-US', {
@@ -42,6 +41,46 @@ class CityInfo extends Component{
             hour: 'numeric',
             minute: 'numeric'
         })
+
+        return {
+            time,
+            date
+        }
+    }
+
+    setTime = () => {
+        setInterval(()=>{
+            let moment = this.getTime()
+
+            this.setState({
+                time: moment.time,
+                date: moment.date
+            })
+        }, 1000)
+    }
+
+
+    componentDidMount() {
+        let dateTimeResult = this.getTime()
+        this.setTime()
+
+        this.setState({
+            time: dateTimeResult.time,
+            date:dateTimeResult.date
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.time !== this.state.time){
+            this.setState({
+                time: this.state.time,
+                date: this.state.date
+            })
+        }
+    }
+
+    render() {
+        const { current, country, city, state } = this.props.info.data.attributes
 
         return(
             <CoverBorder>
@@ -55,7 +94,7 @@ class CityInfo extends Component{
                         { city },
                         { state } <br/>
                         { country } <br/>
-                        { time }, { date } <br/>
+                        { this.state.time }, { this.state.date } <br/>
 
                         <p
                             style={{ color: "blue"}}
