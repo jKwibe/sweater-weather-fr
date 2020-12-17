@@ -1,16 +1,18 @@
 import axios from "axios";
 
-const weatherForecast = async (location) => {
-    let res = await
-    axios.get("https://sweater-weather-api-rails.herokuapp.com/api/v1/forecast",
-        {
-            params:{
-                location
-            }
-        }
-    );
+// Import configurations
+import Configs from "../config";
 
-    return res
+const weatherForecast = async (location) => {
+    const url = Configs().apiUrl
+    return await
+                axios.get(`${url}/forecast`,
+                    {
+                        params:{
+                            location
+                        }
+                    }
+                );
 }
 
 export default weatherForecast
