@@ -96,10 +96,11 @@ class CityInfo extends Component{
                         { country } <br/>
                         { this.state.time }, { this.state.date } <br/>
 
-                        <p
-                            style={{ color: "blue"}}
+                        <div
+                            className="btn btn-location "
+                            style={{ color: "", fontWeight: "bold", textTransform: "capitalize"}}
                             onClick={this.onFormDisplay}
-                        >Change favorite Location</p>{/* Change href route */}
+                        >Change favorite Location</div>{/* Change href route */}
                         { this.state.toggleDisplay && <SearchLocation hideForm={this.onHide} onSubmit={this.props.onChangeLoc}/>}
 
                     </Col>

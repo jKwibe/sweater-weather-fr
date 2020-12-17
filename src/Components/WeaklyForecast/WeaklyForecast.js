@@ -15,7 +15,7 @@ class WeaklyForecast extends Component{
         const { daily, hourly } = this.props.info.data.attributes
 
         return(
-            <section style={{ marginTop: 20, marginBottom: 20}}>
+            <section style={{ marginTop: 20}}>
                 <CoverBorder>
                     <Hourly hourlyData = {hourly}/>
                     <Daily dailyData = {daily}/>

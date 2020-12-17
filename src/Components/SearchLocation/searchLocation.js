@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import {Form, Button} from "react-bootstrap";
+
+import "./searchLocation.css"
 
 class SearchLocation extends Component{
     state = {
@@ -22,11 +25,20 @@ class SearchLocation extends Component{
 
     render() {
         return (
-            <section>
-                <form onSubmit={this.onLocChange}>
-                    <input type="text" value={this.state.inputText} onChange={ this.handleChange }/>
-                    <input type="submit" value="Find Location"/>
-                </form>
+            <section className="location-form">
+                <Form onSubmit={this.onLocChange}>
+                    <Form.Group controlId="city-address">
+                        <Form.Control
+                            className="location-input"
+                            type="text"
+                            placeholder="Enter City"
+                            value={this.state.inputText}
+                            onChange={ this.handleChange} />
+                    </Form.Group>
+                    <Button variant="info" className="submit-button" type="submit" disabled={this.state.inputText.length < 2}>
+                        Find Location
+                    </Button>
+                </Form>
             </section>
         )
     }

@@ -9,10 +9,12 @@ import Switch from "react-bootstrap/Switch";
 import SignIn from "../SignIn/SignIn"
 import SignUp from "../SignUp/SignUp"
 
+import "./App.css"
+
 class App extends Component {
     render() {
         return(
-            <section className="container">
+            <section>
                 <MainNavbar/>
                 <Router>
                     <Switch>

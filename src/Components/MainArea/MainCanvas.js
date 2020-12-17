@@ -5,6 +5,7 @@ import TopWeather from "../TopWeather/TopWeather";
 import WeaklyForecast from "../WeaklyForecast/WeaklyForecast";
 
 import weatherForecast from "../../API/ForecastApi";
+import backgroundImage from "../../API/BackgroundApi";
 
 import "./MainCanvas.css"
 
@@ -13,7 +14,8 @@ class MainCanvas extends Component{
         state = {
             forecast: null,
             isLoaded: false,
-            location: "denver,co"
+            location: "denver,co",
+            bgImage: ""
         }
 
         onLocationChange = (location)=> {
@@ -24,18 +26,24 @@ class MainCanvas extends Component{
 
     async componentDidMount() {
         let res = await weatherForecast(this.state.location)
-        console.log(res, this.state.location)
+        let bgImage = await backgroundImage(this.state.location)
         this.setState({
             forecast: res.data,
-            isLoaded: true
+            isLoaded: true,
+            bgImage: bgImage.data.data.attributes.image_url
         })
+
+        console.log(bgImage)
+
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.state.location !== prevState.location){
             let res = await weatherForecast(this.state.location)
+            let bgImage = await backgroundImage(this.state.location)
             this.setState({
-                forecast: res.data
+                forecast: res.data,
+                bgImage: bgImage.data.data.attributes.image_url
             })
         }
     }
@@ -44,24 +52,33 @@ class MainCanvas extends Component{
     render() {
 
         const { forecast, isLoaded } = this.state;
+        console.log(this.state.bgImage)
+        const backgroundStyle = {
+            backgroundImage: `url(${this.state.bgImage})` ,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed"
+            }
 
         if(isLoaded) {
             return (
-                <main className="main-section">
-                    <section className="top-city-info row">
-                        <article className="left-city-info col-6">
-                            <CityInfo onChangeLoc={this.onLocationChange} info={forecast}/>
-                        </article>
+                <main className="main-section " style={backgroundStyle}>
+                    <div className="container-fluid">
+                        <section className="top-city-info row">
+                            <article className="left-city-info col-6">
+                                <CityInfo onChangeLoc={this.onLocationChange} info={forecast}/>
+                            </article>
 
-                        <article className="right-city-info col-6">
-                            <TopWeather  info={forecast}/>
-                        </article>
-                    </section>
-                    <section className="row">
-                        <section className="col-12">
-                            <WeaklyForecast info={forecast}/>
+                            <article className="right-city-info col-6">
+                                <TopWeather  info={forecast}/>
+                            </article>
                         </section>
-                    </section>
+                        <section className="row">
+                            <section className="col-12">
+                                <WeaklyForecast info={forecast}/>
+                            </section>
+                        </section>
+                    </div>
                 </main>
             )
         }

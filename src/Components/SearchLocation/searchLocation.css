@@ -1,0 +1,31 @@
+.location-form{
+    max-width: 70%;
+    align-content: center;
+    background: white;
+    padding: 20px;
+    margin: 10px auto;
+    position: relative;
+}
+.location-form:before{
+    content: '';
+    position: absolute;
+    background: white;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    top: -5px;
+}
+
+.submit-button{
+    background: gray !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+}
+input[type=text].location-input{
+    border-radius: 0 !important;
+    outline: none !important;
+}
+
+input[type=text]:focus{
+    outline: none !important;
+}

@@ -6,7 +6,7 @@ import "./Navbar.css"
 function MainNavbar() {
     return (
         <header className="main-header">
-            <Navbar>
+            <Navbar sticky="top">
                 <Navbar.Brand href="/">Sweater Weather</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
