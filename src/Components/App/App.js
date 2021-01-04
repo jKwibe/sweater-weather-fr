@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
 import MainNavbar from "../Navbar/Navbar";
@@ -11,8 +11,7 @@ import SignUp from "../SignUp/SignUp"
 
 import "./App.scss"
 
-class App extends Component {
-    render() {
+const App = () => {
         return(
             <section>
                 <MainNavbar/>
@@ -26,7 +25,6 @@ class App extends Component {
                 <Footer/>
             </section>
         )
-    }
 }
 
 export default App;

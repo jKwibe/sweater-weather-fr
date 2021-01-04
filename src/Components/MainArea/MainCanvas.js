@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React, {useEffect, useState} from "react";
 
 import CityInfo from "../CityInfo/CityInfo";
 import TopWeather from "../TopWeather/TopWeather";
@@ -11,87 +11,68 @@ import backgroundImage from "../../API/BackgroundApi";
 import "./MainCanvas.scss"
 
 
-class MainCanvas extends Component{
-        state = {
-            forecast: null,
-            isLoaded: false,
-            location: "denver,co",
-            bgImage: ""
-        }
+const MainCanvas = () => {
+    const [forecast, setForecast] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [location, setLocation] = useState('denver,co')
+    const [bgImage, setBgImage] = useState('')
 
-        onLocationChange = (location)=> {
-            this.setState({
-                location: location
-            })
-        }
-
-    async componentDidMount() {
-        let res = await weatherForecast(this.state.location)
-        let bgImage = await backgroundImage(this.state.location)
-        this.setState({
-            forecast: res.data,
-            isLoaded: true,
-            bgImage: bgImage.data.data.attributes.image_url
-        })
-
-        console.log(bgImage)
-
+    const onLocationChange = (location) => {
+        setLocation(location)
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.state.location !== prevState.location){
-            let res = await weatherForecast(this.state.location)
-            let bgImage = await backgroundImage(this.state.location)
-            this.setState({
-                forecast: res.data,
-                bgImage: bgImage.data.data.attributes.image_url
-            })
-        }
-    }
+    useEffect(() => {
+        let data = async () => {
+            let forecastData = await weatherForecast(location);
+            let bgImage = await backgroundImage(location);
 
-    // eslint-disable-next-line react/require-render-return
-    render() {
-
-        const { forecast, isLoaded } = this.state;
-        console.log(this.state.bgImage)
-        const backgroundStyle = {
-            backgroundImage: `url(${this.state.bgImage})` ,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed"
+            if(forecast){
+                setIsLoaded(true)
             }
 
-        if(isLoaded) {
-            return (
-                <main className="main-section " style={backgroundStyle}>
-                    <div className="container-fluid">
-                        <section className="top-city-info row">
-                            <article className="left-city-info col-6">
-                                <CityInfo onChangeLoc={this.onLocationChange} info={forecast}/>
-                            </article>
-
-                            <article className="right-city-info col-6">
-                                <TopWeather  info={forecast}/>
-                            </article>
-                        </section>
-                        <CoverBorder className="row">
-                            <section className="col-12">
-                                <WeaklyForecast info={forecast}/>
-                            </section>
-                        </CoverBorder>
-                    </div>
-                </main>
-            )
+            setForecast(forecastData.data)
+            setBgImage(bgImage.data.data.attributes.image_url);
         }
+        data()
+    }, [location, forecast])
 
+    const backgroundStyle = {
+        backgroundImage: `url(${bgImage})` ,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed"
+    }
+
+    if(isLoaded) {
         return (
-            <Fragment>
-                <section>
-                    <p>Loading...</p>
-                </section>
-            </Fragment>
+            <main className="main-section " style={backgroundStyle}>
+                <div className="container-fluid">
+                    <section className="top-city-info row">
+                        <article className="left-city-info col-6">
+                            <CityInfo onChangeLoc={onLocationChange} info={forecast}/>
+                        </article>
+
+                        <article className="right-city-info col-6">
+                            <TopWeather  info={forecast}/>
+                        </article>
+                    </section>
+                    <CoverBorder className="row">
+                        <section className="col-12">
+                            <WeaklyForecast info={forecast}/>
+                        </section>
+                    </CoverBorder>
+                </div>
+            </main>
         )
     }
+
+    return (
+        <>
+            <section>
+                <p>Loading...</p>
+            </section>
+        </>
+    )
 }
 
 export default MainCanvas;

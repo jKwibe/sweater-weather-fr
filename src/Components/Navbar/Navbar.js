@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
 import "./Navbar.scss"
 
-function MainNavbar() {
+const MainNavbar = () => {
     return (
         <header className="main-header">
             <Navbar sticky="top">

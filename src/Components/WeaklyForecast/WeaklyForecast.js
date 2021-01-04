@@ -1,5 +1,3 @@
-import React, {Component} from "react";
-
 //Import CSS
 import "./WeaklyForecast.scss"
 
@@ -7,17 +5,14 @@ import "./WeaklyForecast.scss"
 import Hourly from "./Hourly/Hourly";
 import Daily from "./Daily/Daily";
 
-class WeaklyForecast extends Component{
-    render() {
-        const { daily, hourly } = this.props.info.data.attributes
-
-        return(
-            <section style={{ marginTop: 20}}>
-                <Hourly hourlyData = {hourly}/>
-                <Daily dailyData = {daily}/>
-            </section>
-        )
-    }
+const WeaklyForecast = ({ info }) => {
+    const { daily, hourly } = info.data.attributes
+    return(
+        <section style={{ marginTop: 20}}>
+            <Hourly hourlyData = {hourly}/>
+            <Daily dailyData = {daily}/>
+        </section>
+    )
 }
 
 export default WeaklyForecast;
