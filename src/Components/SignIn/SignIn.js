@@ -1,82 +1,68 @@
-import React, { Component } from "react"
+import React, {useState} from "react"
 import axios from 'axios'
 
-export class SignIn extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            userCredentials: {
-                email: '',
-                password: '',
-            },
-            user: {
-                email: ''
-            }
+const SignIn = ({ setLoggedIn }) => {
+    const [ email, setEmail ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const [userEmail , setUserEmail ] = useState('')
+
+    const handleChange = event => {
+        switch (event.target.name) {
+            case 'email':
+                setEmail(event.target.value)
+                break;
+            case 'password':
+                setPassword(event.target.value)
+                break;
+            default:
+                return;
         }
-
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleChange(event){
-        let userCredentials = this.state.userCredentials
-        userCredentials[event.target.name] = event.target.value
-
-        this.setState({
-            userCredentials
-        })
-    }
-
-    handleSubmit(event){
+    const handleSubmit= event => {
         event.preventDefault()
 
         axios.post('https://sweater-weather-api-rails.herokuapp.com/api/v1/session',
-            this.state.userCredentials)
+            {
+                email,
+                password
+            })
             .then(res => {
-                const { access_token, email } = res.data.data.attributes
-                localStorage.setItem("access_token", access_token)
-                this.setState({
-                    user: {
-                        email
-                    }
-                })
+                const { access_token} = res.data.data.attributes
+                console.log(access_token);
+                setLoggedIn(true)
+                setUserEmail(email)
             })
             .catch(err => console.error(err))
 
-
-        console.log(`a name has been submitted => ${this.state.userCredentials.email}`)
-        this.setState({
-            userCredentials: {
-                email: '',
-                password: '',
-            }
-        })
-
+        setPassword('')
+        setEmail('')
     }
-    render() {
-        const {email, password} = this.state.userCredentials
-        return(
-            <section>
-                <p>Welcome to the signup page</p>
-                <section className="sign_in_form">
-                    <p>The signIn form will come here </p>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Email:
-                            <input type="email" name="email" value={email} onChange={this.handleChange} />
-                        </label>
-                        <br/>
-                        <label>
-                            Password:
-                            <input type="password" name="password" value={password} onChange={this.handleChange} />
-                        </label>
-                        <br/>
-                        <input type="submit" value="Submit" />
-                    </form>
-                </section>
+    console.log(email);
+    console.log(password);
+    console.log(`a name has been submitted => ${userEmail}`)
+
+    return(
+        <section>
+            <p>Welcome to the signup page</p>
+            <section className="sign_in_form">
+                <p>The signIn form will come here </p>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Email:
+                        <input type="email" name="email" value={email} onChange={handleChange} />
+                    </label>
+                    <br/>
+                    <label>
+                        Password:
+                        <input type="password" name="password" value={password} onChange={handleChange} />
+                    </label>
+                    <br/>
+                    <input type="submit" value="Submit" />
+                </form>
             </section>
-        )
-    }
+        </section>
+    )
 }
 
 export default SignIn

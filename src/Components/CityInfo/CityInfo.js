@@ -1,35 +1,31 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
+import { PropTypes } from 'prop-types';
 import {Row, Col} from "react-bootstrap";
+import {countries} from "country-data"
 
 // import project components
 import SearchLocation from "../SearchLocation/searchLocation";
 
 // import CSS
-import "./CityInfo.css"
+import "./CityInfo.scss"
 
 // import the style component
 import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
 
-class CityInfo extends Component{
-    state = {
-        toggleDisplay: false,
-        time: "",
-        date:""
+const CityInfo = ({onChangeLoc, info}) =>{
+    const [ toggleDisplay, setToggleDisplay] = useState(false)
+    const [ time, setTime] = useState('')
+    const [ date, setDate] = useState('')
+
+    const onFormDisplay = ()=>{
+        setToggleDisplay(!toggleDisplay)
     }
 
-    onFormDisplay = ()=>{
-        this.setState({
-            toggleDisplay: !this.state.toggleDisplay
-        })
+    const onHide =() =>{
+        setToggleDisplay(false)
     }
 
-    onHide =() =>{
-        this.setState({
-            toggleDisplay: false
-        })
-    }
-
-    getTime = ()=>{
+    const getTime = ()=>{
         const unixTime = Date.now()
         let formattedDate = new Date(unixTime)
         let date = formattedDate.toLocaleString('en-US', {
@@ -48,66 +44,60 @@ class CityInfo extends Component{
         }
     }
 
-    setTime = () => {
-        setInterval(()=>{
-            let moment = this.getTime()
-
-            this.setState({
-                time: moment.time,
-                date: moment.date
-            })
+    const setDateTime = () => {
+        let interval =setInterval(()=>{
+            let moment = getTime()
+            setDate(moment.date)
+            setTime(moment.time)
         }, 1000)
+        return interval;
     }
 
-
-    componentDidMount() {
-        let dateTimeResult = this.getTime()
-        this.setTime()
-
-        this.setState({
-            time: dateTimeResult.time,
-            date:dateTimeResult.date
-        })
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.time !== this.state.time){
-            this.setState({
-                time: this.state.time,
-                date: this.state.date
-            })
+    useEffect(()=>{
+        let dateTimeResult = getTime()
+        let inter = setDateTime()
+        setTime(dateTimeResult.time)
+        setDate(dateTimeResult.date)
+        return () => {
+            clearInterval(inter)
         }
-    }
+        // eslint-disable-next-line
+    }, [time, date])
 
-    render() {
-        const { current, country, city, state } = this.props.info.data.attributes
 
-        return(
-            <CoverBorder>
-                <Row>
-                    <Col>
-                        <img src={ current.icon } alt="weather icon"/>
-                        {  current.weather_description } <br/>
-                        { Math.floor(current.temp) } &#8457;
-                    </Col>
-                    <Col>
-                        { city },
-                        { state } <br/>
-                        { country } <br/>
-                        { this.state.time }, { this.state.date } <br/>
+    const { current, country, city, state } = info.data.attributes
 
-                        <div
-                            className="btn btn-location "
-                            style={{ color: "", fontWeight: "bold", textTransform: "capitalize"}}
-                            onClick={this.onFormDisplay}
-                        >Change favorite Location</div>{/* Change href route */}
-                        { this.state.toggleDisplay && <SearchLocation hideForm={this.onHide} onSubmit={this.props.onChangeLoc}/>}
 
-                    </Col>
-                </Row>
-            </CoverBorder>
-        )
-    }
+    return(
+        <CoverBorder>
+            <Row>
+                <Col>
+                    <img src={ current.icon } alt="weather icon"/>
+                    {  current.weather_description } <br/>
+                    { Math.floor(current.temp) } &#8457;
+                </Col>
+                <Col>
+                    { city },
+                    { state } <br/>
+                    { countries[country].name } <br/>
+                    { time }, { date } <br/>
+
+                    <div
+                        className="btn btn-location "
+                        style={{ color: "", fontWeight: "bold", textTransform: "capitalize"}}
+                        onClick={onFormDisplay}
+                    >Change favorite Location</div>{/* Change href route */}
+                    { toggleDisplay && <SearchLocation hideForm={onHide} onSubmit={onChangeLoc}/>}
+
+                </Col>
+            </Row>
+        </CoverBorder>
+    )
+}
+
+CityInfo.prototype = {
+    info: PropTypes.object.isRequired,
+    onChangeLoc: PropTypes.func.isRequired
 }
 
 export default CityInfo;

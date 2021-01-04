@@ -1,5 +1,9 @@
+@import "~bourbon";
+
 .cover-border{
     height: 100%;
     padding: 20px;
     background: rgba(0, 0, 0, .7);
+    margin-top: 0.7rem;
+    font-family: $font-stack-verdana;
 }

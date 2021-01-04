@@ -1,18 +1,19 @@
 import React from "react";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
-import "./Navbar.css"
+import {NavLink} from "react-router-dom";
+import "./Navbar.scss"
 
-function MainNavbar() {
+const MainNavbar = () => {
     return (
         <header className="main-header">
             <Navbar sticky="top">
-                <Navbar.Brand href="/">Sweater Weather</Navbar.Brand>
+                <NavLink className="navbar-brand" to='/'>Sweater Weather</NavLink>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Nav className="ml-auto">
-                        <Nav.Link href="/signin">SignIn</Nav.Link>
-                        <Nav.Link href="/signup">SignUp</Nav.Link>
+                        <NavLink className="nav-link" to='/signin'>SignIn</NavLink>
+                        <NavLink className="nav-link" to='/signup'>SignUp</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

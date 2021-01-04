@@ -1,0 +1,22 @@
+/*Footer Styling Here*/
+footer.foot{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    color: floralwhite;
+    background: rgba(0,0,0, .7);
+}
+
+footer.foot .footer-content_body p{
+    font-size: 1.2rem;
+}
+
+footer.foot .footer-content_icons{
+    text-align: center;
+}
+
+footer.foot .footer-content_icons a i{
+    color: floralwhite !important;
+    font-size: 2rem;
+    padding: 0 1rem;
+}

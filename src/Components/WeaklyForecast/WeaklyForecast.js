@@ -1,28 +1,18 @@
-import React, {Component} from "react";
-
 //Import CSS
-import "./WeaklyForecast.css"
+import "./WeaklyForecast.scss"
 
 // import components
 import Hourly from "./Hourly/Hourly";
 import Daily from "./Daily/Daily";
 
-// Import Styled Components
-import CoverBorder from "../../StyleComponents/CoverBorder/CoverBorder";
-
-class WeaklyForecast extends Component{
-    render() {
-        const { daily, hourly } = this.props.info.data.attributes
-
-        return(
-            <section style={{ marginTop: 20}}>
-                <CoverBorder>
-                    <Hourly hourlyData = {hourly}/>
-                    <Daily dailyData = {daily}/>
-                </CoverBorder>
-            </section>
-        )
-    }
+const WeaklyForecast = ({ info }) => {
+    const { daily, hourly } = info.data.attributes
+    return(
+        <section style={{ marginTop: 20}}>
+            <Hourly hourlyData = {hourly}/>
+            <Daily dailyData = {daily}/>
+        </section>
+    )
 }
 
 export default WeaklyForecast;

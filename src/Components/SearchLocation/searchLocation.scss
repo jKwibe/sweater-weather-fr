@@ -5,7 +5,9 @@
     padding: 20px;
     margin: 10px auto;
     position: relative;
+    z-index: 100;
 }
+
 .location-form:before{
     content: '';
     position: absolute;
@@ -14,16 +16,26 @@
     height: 20px;
     transform: rotate(45deg);
     top: -5px;
+    z-index: 0;
 }
 
 .submit-button{
     background: gray !important;
     border-radius: 0 !important;
     border: 0 !important;
+    font-size: .8rem !important;
 }
+
 input[type=text].location-input{
     border-radius: 0 !important;
     outline: none !important;
+    height: 1.9rem !important;
+    position: relative;
+    z-index: 2;
+}
+
+input[type=text].location-input::placeholder{
+    font-size: .8rem !important;
 }
 
 input[type=text]:focus{

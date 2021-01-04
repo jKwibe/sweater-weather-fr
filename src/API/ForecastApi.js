@@ -1,10 +1,11 @@
 import axios from "axios";
 
 // Import configurations
-import Configs from "../config";
+import config from "../config";
 
 const weatherForecast = async (location) => {
-    const url = Configs().apiUrl
+    const url = config.apiUrl
+    console.log('API called');
     return await
                 axios.get(`${url}/forecast`,
                     {
