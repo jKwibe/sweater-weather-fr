@@ -45,18 +45,22 @@ const CityInfo = ({onChangeLoc, info}) =>{
     }
 
     const setDateTime = () => {
-        setInterval(()=>{
+        let interval =setInterval(()=>{
             let moment = getTime()
             setDate(moment.date)
             setTime(moment.time)
         }, 1000)
+        return interval;
     }
 
     useEffect(()=>{
         let dateTimeResult = getTime()
-        setDateTime()
+        let inter = setDateTime()
         setTime(dateTimeResult.time)
         setDate(dateTimeResult.date)
+        return () => {
+            clearInterval(inter)
+        }
         // eslint-disable-next-line
     }, [time, date])
 
