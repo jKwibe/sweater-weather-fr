@@ -11,11 +11,8 @@ import backgroundImage from "../../API/BackgroundApi";
 import "./MainCanvas.scss"
 
 
-const MainCanvas = () => {
-    const [forecast, setForecast] = useState(null)
+const MainCanvas = ({ forecast, setForecast, bgImage, setBgImage, location, setLocation}) => {
     const [isLoaded, setIsLoaded] = useState(false)
-    const [location, setLocation] = useState('denver,co')
-    const [bgImage, setBgImage] = useState('')
 
     const onLocationChange = (location) => {
         setLocation(location)
@@ -26,7 +23,7 @@ const MainCanvas = () => {
                 setForecast(res[0].data)
                 setBgImage(res[1].data.data.attributes.image_url)
             })
-        
+        // eslint-disable-next-line
     }, [location])
 
     useEffect(() => {

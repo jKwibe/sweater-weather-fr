@@ -13,14 +13,26 @@ import "./App.scss"
 
 const App = () => {
     const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-    console.log(isLoggedIn);
+    const [forecast, setForecast] = useState(null)
+    const [bgImage, setBgImage] = useState('')
+    const [location, setLocation] = useState('denver,co')
     return(
             <section>
 
                 <Router>
                     <MainNavbar/>
                     <Switch>
-                        <Route path="/" exact component={MainCanvas}/>
+                        <Route path="/" exact render={ props => (
+                            <MainCanvas {...props}
+                                forecast={forecast}
+                                setForecast={setForecast}
+                                bgImage={bgImage}
+                                setBgImage={setBgImage}
+                                location={location}
+                                setLocation={setLocation}
+                                />
+
+                        )}/>
                         <Route path="/signin" exact render={ props => (
                             <SignIn {...props} isLoggedIn={isLoggedIn} setLoggedIn={setIsLoggedIn}/>
                         )}/>
