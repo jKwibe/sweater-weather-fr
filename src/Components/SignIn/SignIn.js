@@ -2,38 +2,44 @@ import React, {useState} from "react"
 import axios from 'axios'
 
 const SignIn = () => {
-    const [ userCredentials, setUserCredentials ] = useState({
-        email: '',
-        password: ''
-    })
+    const [ email, setEmail ] = useState('')
+    const [ password, setPassword ] = useState('')
     const [userEmail , setUserEmail ] = useState('')
 
     const handleChange = event => {
-        let userData = userCredentials
-        userCredentials[event.target.name] = event.target.value
-
-        console.log(userData)
-        setUserCredentials(userData)
+        switch (event.target.name) {
+            case 'email':
+                setEmail(event.target.value)
+                break;
+            case 'password':
+                setPassword(event.target.value)
+                break;
+            default:
+                return;
+        }
     }
 
     const handleSubmit= event => {
         event.preventDefault()
 
         axios.post('https://sweater-weather-api-rails.herokuapp.com/api/v1/session',
-            userCredentials)
+            {
+                email,
+                password
+            })
             .then(res => {
-                const { access_token, email } = res.data.data.attributes
-                localStorage.setItem("access_token", access_token)
+                const { access_token} = res.data.data.attributes
+                console.log(access_token);
                 setUserEmail(email)
             })
             .catch(err => console.error(err))
 
-
-        console.log(`a name has been submitted => ${userEmail}`)
-        setUserCredentials({ email: '', password: ''})
+        setPassword('')
+        setEmail('')
     }
-
-    const {email, password} = userCredentials
+    console.log(email);
+    console.log(password);
+    console.log(`a name has been submitted => ${userEmail}`)
 
     return(
         <section>
