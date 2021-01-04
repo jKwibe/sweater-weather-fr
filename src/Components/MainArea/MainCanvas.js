@@ -20,21 +20,20 @@ const MainCanvas = () => {
     const onLocationChange = (location) => {
         setLocation(location)
     }
+    useEffect(()=>{
+        Promise.all([weatherForecast(location), backgroundImage(location)])
+            .then(res => {
+                setForecast(res[0].data)
+                setBgImage(res[1].data.data.attributes.image_url)
+            })
+        
+    }, [location])
 
     useEffect(() => {
-        let data = async () => {
-            let forecastData = await weatherForecast(location);
-            let bgImage = await backgroundImage(location);
-
-            if(forecast){
-                setIsLoaded(true)
-            }
-
-            setForecast(forecastData.data)
-            setBgImage(bgImage.data.data.attributes.image_url);
+        if(forecast){
+            setIsLoaded(true)
         }
-        data()
-    }, [location, forecast])
+    }, [forecast])
 
     const backgroundStyle = {
         backgroundImage: `url(${bgImage})` ,
